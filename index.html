@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Page Title</title>
+	
+	<style type="text/css" media="screen">
+		
+		body
+		{
+			background: #587C87;
+			width: 100%;
+			height: 100%;
+		}
+		
+		
+		#test
+		{
+			position: absolute;
+			width: 300px;
+			height: 150px;
+			top: 150px;
+			left: 150px;
+		}
+		
+	</style>
+	
+	<script type="text/javascript" charset="utf-8">
+		
+	
+		
+		function drawLoginCanvas() {
+
+			var target = document.getElementById('test');
+
+			var ctx = target.getContext('2d');
+			
+		
+		
+
+			var imageWidth = ctx.canvas.width;
+			var imageHeight = ctx.canvas.height;
+			var shadowSize = 15;
+			var cornerRadius = 5;
+			var cornerRadiusHalf = cornerRadius * 0.5;
+			
+			var pointerPosition = 195;
+			var pointerWidth = 30;
+			var pointerHeight = 15;
+			
+			
+			
+			ctx.clearRect(0,0,imageWidth, imageHeight);
+
+			//starts at top left corner and moves clockwise
+			ctx.beginPath();
+			ctx.moveTo(shadowSize, shadowSize + cornerRadius + pointerHeight);
+			ctx.bezierCurveTo(shadowSize, shadowSize + pointerHeight + cornerRadiusHalf, shadowSize + cornerRadiusHalf, shadowSize + pointerHeight, shadowSize + cornerRadius, shadowSize + pointerHeight);
+			ctx.lineTo(shadowSize + cornerRadius + pointerPosition, shadowSize + pointerHeight);
+			ctx.lineTo(shadowSize + cornerRadius + pointerPosition + pointerWidth * 0.5, shadowSize);
+			ctx.lineTo(shadowSize + cornerRadius + pointerPosition + pointerWidth, shadowSize + pointerHeight);
+			ctx.lineTo( imageWidth - shadowSize - cornerRadius, shadowSize + pointerHeight);
+			ctx.bezierCurveTo( imageWidth - shadowSize - cornerRadiusHalf, shadowSize + pointerHeight, imageWidth - shadowSize, shadowSize + pointerHeight + cornerRadiusHalf, imageWidth - shadowSize, shadowSize + cornerRadius + pointerHeight);
+			ctx.lineTo( imageWidth - shadowSize, imageHeight - shadowSize - cornerRadius);
+			ctx.bezierCurveTo( imageWidth - shadowSize, imageHeight - shadowSize - (cornerRadiusHalf), imageWidth - shadowSize - cornerRadiusHalf, imageHeight - shadowSize, imageWidth - shadowSize - cornerRadius, imageHeight - shadowSize);
+			ctx.lineTo(shadowSize + cornerRadius, imageHeight - shadowSize);
+			ctx.bezierCurveTo(shadowSize + (cornerRadiusHalf), imageHeight - shadowSize, shadowSize, imageHeight - shadowSize - cornerRadiusHalf, shadowSize, imageHeight - shadowSize - cornerRadius);
+			ctx.lineTo(shadowSize, shadowSize + cornerRadius + pointerHeight);
+			ctx.closePath();
+
+			ctx.fillStyle = 'rgba(1,33,45,0.85)';
+			ctx.strokeStyle = 'rgba(255,255,255,0.3)';
+			ctx.shadowOffsetX = 0;
+			ctx.shadowOffsetY = 3;
+			ctx.shadowBlur = shadowSize;
+			ctx.shadowColor = 'rgba(0,0,0,0.6)';
+			ctx.fill();
+			ctx.stroke();
+
+		}
+		
+		
+	</script>
+</head>
+<body onLoad="drawLoginCanvas()">
+	
+	<canvas id="test"></canvas>
+	
+</body>
+</html>
